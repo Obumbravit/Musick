@@ -1,0 +1,11 @@
+Package: com.obumbravit.musick
+Name: Musick
+Depends: mobilesubstrate
+Version: 1.0
+Architecture: iphoneos-arm
+Description: Fast-forward and rewind buttons in Music.
+Maintainer: Obumbravit
+Author: Obumbravit
+Section: Tweaks
+Icon: https://raw.githubusercontent.com/Obumbravit/Icons/master/Musick.png
+Depiction: https://obumbravit.github.io/0SRepo/depictions/?p=com.obumbravit.musick
