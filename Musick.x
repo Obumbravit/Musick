@@ -3,6 +3,7 @@
 @import UIKit;
 #import "MediaRemote.h"
 #import "Classes/FauxNowPlayingTransportButton.h"
+#import "Prefs.h"
 
 @interface ControlStackView
 - (void)setSpacing:(double)arg1;
@@ -27,10 +28,10 @@ static double mediaSliderValue;
     46,
     46
   );
-  [rewindButton setImage:[UIImage systemImageNamed:@"gobackward.15"] forState:UIControlStateNormal];
+  [rewindButton setImage:[UIImage systemImageNamed:[NSString stringWithFormat:@"gobackward.%@", [@(rewindValue) stringValue]]] forState:UIControlStateNormal];
   [rewindButton setTintColor:[UIColor systemRedColor]];
   [rewindButton handleControlEvent:UIControlEventTouchUpInside withBlock:^{
-    MRMediaRemoteSetElapsedTime(mediaSliderValue - 15);
+    MRMediaRemoteSetElapsedTime(mediaSliderValue - rewindValue);
   }];
   [mutableArray addObject:rewindButton];
 
@@ -43,10 +44,10 @@ static double mediaSliderValue;
     46,
     46
   );
-  [skipButton setImage:[UIImage systemImageNamed:@"goforward.15"] forState:UIControlStateNormal];
+  [skipButton setImage:[UIImage systemImageNamed:[NSString stringWithFormat:@"goforward.%@", [@(fastForwardValue) stringValue]]] forState:UIControlStateNormal];
   [skipButton setTintColor:[UIColor systemRedColor]];
   [skipButton handleControlEvent:UIControlEventTouchUpInside withBlock:^{
-    MRMediaRemoteSetElapsedTime(mediaSliderValue + 15);
+    MRMediaRemoteSetElapsedTime(mediaSliderValue + fastForwardValue);
   }];
   [mutableArray addObject:skipButton];
 
@@ -74,5 +75,6 @@ static double mediaSliderValue;
 
 %ctor
 {
-    %init(ControlStackView = objc_getClass("MusicApplication.NowPlayingTransportControlStackView"), PlayerTimeControl = objc_getClass("MusicApplication.PlayerTimeControl"));
+  notificationCallback();
+  if (musickEnabled) %init(ControlStackView = objc_getClass("MusicApplication.NowPlayingTransportControlStackView"), PlayerTimeControl = objc_getClass("MusicApplication.PlayerTimeControl"));
 }

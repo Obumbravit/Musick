@@ -16,3 +16,5 @@ Musick_PRIVATE_FRAMEWORKS = MediaRemote
 Musick_CFLAGS = -fobjc-arc
 
 include $(THEOS)/makefiles/tweak.mk
+SUBPROJECTS += musickprefs
+include $(THEOS)/makefiles/aggregate.mk
